@@ -65,7 +65,7 @@ if ( -not ("TrustAllCertsPolicy" -as [type])) {
 
 
 # Check required PowerCLI assemblies are loaded.
-Check-PowerCliAsemblies
+#Check-PowerCliAsemblies
 
 
 #region Validation Functions
