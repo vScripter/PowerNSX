@@ -16,6 +16,7 @@ function Check-PowerCliAsemblies {
     #and should function in a modified PowerShell env, as well as normal
     #PowerCLI.
 
+
     $RequiredAsm = (
         "VMware.VimAutomation.ViCore.Cmdlets",
         "VMware.Vim",
@@ -41,6 +42,7 @@ function Check-PowerCliAsemblies {
         "VMware.ImageBuilder"
     )
 
+    #$RequiredAsm = Get-Content -Path $PSScriptRoot\.\Private\Inputs\PowerCLI-Assemblies.txt
 
     $CurrentAsmName = foreach( $asm in ([AppDomain]::CurrentDomain.GetAssemblies())) { $asm.getName() }
     $CurrentAsmDict = $CurrentAsmName | Group-Object -AsHashTable -Property Name
@@ -48,8 +50,11 @@ function Check-PowerCliAsemblies {
     foreach( $req in $RequiredAsm ) {
 
         if ( -not $CurrentAsmDict.Contains($req) ) {
-            write-warning "PowerNSX requires PowerCLI."
-            throw "Assembly $req not found.  Some required PowerCli types are not available in this PowerShell session.  Please ensure you are running PowerNSX in a PowerCLI session, or have manually loaded the required assemblies."}
+
+            Write-Warning -Message "[$($MyInvocation.MyCommand.Name)[WARNING] PowerNSX requires PowerCLI. The {$req} .NET Assembly was not found."
+            #throw "Assembly $req not found.  Some required PowerCli types are not available in this PowerShell session.  Please ensure you are running PowerNSX in a PowerCLI session, or have manually loaded the required assemblies."}
+
+        } # end if
 
     } # end forech
 
