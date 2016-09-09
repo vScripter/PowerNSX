@@ -20286,7 +20286,7 @@ function Get-NsxFirewallSavedConfiguration {
                 }
                 else {
             
-                    $Return
+                    $Return.firewallDrafts.firewallDraft
                 }
             }
         }
